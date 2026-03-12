@@ -15,4 +15,8 @@ Features:
   - Solitaire
   - Conway's Game of Life
   - Minesweeper
+  - Tetris
+  - Blackjack
+  - Baccarat
+  - 5 Card Poker
 - Computer Generated 3D World Scenes (City, Spaceship, Ocean, Crystal Cavern)
