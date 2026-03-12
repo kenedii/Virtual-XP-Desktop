@@ -1,0 +1,16 @@
+{
+  "name": "y2k-frontend",
+  "version": "1.0.0",
+  "description": "Y2K retro Windows XP desktop simulator",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "^0.134.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
