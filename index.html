@@ -365,7 +365,7 @@
           </div>
           <div class="start-item" ondblclick="openApp('games')">
             <svg viewBox="0 0 16 16" width="22" height="22"><rect x="1" y="4" width="14" height="11" rx="1" fill="#d4e8d0" stroke="#4a7c59" stroke-width="0.8"/><rect x="1" y="1" width="4" height="4" rx="1" fill="#f5d97a" stroke="#c9a000" stroke-width="0.8"/><circle cx="6" cy="10" r="2" fill="#c0c0c0" stroke="#808080" stroke-width="0.5"/><rect x="9" y="9" width="4" height="4" rx="0.5" fill="white" stroke="#999" stroke-width="0.4"/><text x="10.5" y="12.5" font-size="4" fill="#cc0000" font-family="serif" text-anchor="middle">♥</text></svg>
-            <div><div class="start-item-title">Games</div><div class="start-item-sub">Minesweeper, Solitaire, Life</div></div>
+            <div><div class="start-item-title">Games</div><div class="start-item-sub">Tetris, Blackjack, Poker, Baccarat</div></div>
           </div>
           <div class="start-item" ondblclick="openApp('wmplayer')">
             <svg viewBox="0 0 16 16" width="22" height="22"><defs><radialGradient id="sm-wmpg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1e88e5"/><stop offset="100%" stop-color="#0d47a1"/></radialGradient></defs><circle cx="8" cy="8" r="7" fill="url(#sm-wmpg)"/><circle cx="8" cy="8" r="5" fill="none" stroke="#64b5f6" stroke-width="0.8"/><polygon points="6.5,5.5 6.5,10.5 11.5,8" fill="white" opacity="0.9"/></svg>
@@ -885,6 +885,235 @@
           <span class="scenes3d-label">Conway's Life</span>
         </div>
 
+        <div class="games-item scenes3d-item" data-app="tetris" title="Double-click to play Tetris">
+          <div class="scenes3d-icon">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="48" height="48" rx="3" fill="#111"/>
+              <rect x="4" y="4" width="9" height="9" rx="1" fill="#00e5ff"/>
+              <rect x="14" y="4" width="9" height="9" rx="1" fill="#00e5ff"/>
+              <rect x="24" y="4" width="9" height="9" rx="1" fill="#00e5ff"/>
+              <rect x="14" y="14" width="9" height="9" rx="1" fill="#00e5ff"/>
+              <rect x="4" y="24" width="9" height="9" rx="1" fill="#ff4081"/>
+              <rect x="14" y="24" width="9" height="9" rx="1" fill="#ff4081"/>
+              <rect x="14" y="34" width="9" height="9" rx="1" fill="#ff4081"/>
+              <rect x="24" y="34" width="9" height="9" rx="1" fill="#ff4081"/>
+              <rect x="34" y="14" width="9" height="9" rx="1" fill="#76ff03"/>
+              <rect x="34" y="24" width="9" height="9" rx="1" fill="#76ff03"/>
+              <rect x="34" y="34" width="9" height="9" rx="1" fill="#ffab00"/>
+              <rect x="24" y="24" width="9" height="9" rx="1" fill="#ffab00"/>
+            </svg>
+          </div>
+          <span class="scenes3d-label">Tetris</span>
+        </div>
+
+        <div class="games-item scenes3d-item" data-app="blackjack" title="Double-click to play Blackjack">
+          <div class="scenes3d-icon">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="48" height="48" rx="3" fill="#1a4a1a"/>
+              <rect x="6" y="8" width="16" height="26" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+              <text x="9" y="22" font-size="12" fill="#222" font-family="serif">♠</text>
+              <text x="9" y="13" font-size="7" fill="#222" font-family="sans-serif" font-weight="bold">A</text>
+              <rect x="26" y="8" width="16" height="26" rx="2" fill="white" stroke="#ccc" stroke-width="1"/>
+              <text x="29" y="22" font-size="12" fill="#cc0000" font-family="serif">♥</text>
+              <text x="29" y="13" font-size="7" fill="#cc0000" font-family="sans-serif" font-weight="bold">K</text>
+              <text x="24" y="44" font-size="8" fill="#f5d97a" font-family="sans-serif" font-weight="bold" text-anchor="middle">21</text>
+            </svg>
+          </div>
+          <span class="scenes3d-label">Blackjack</span>
+        </div>
+
+        <div class="games-item scenes3d-item" data-app="poker" title="Double-click to play 5-Card Draw Poker">
+          <div class="scenes3d-icon">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="48" height="48" rx="3" fill="#1a4a1a"/>
+              <rect x="2" y="14" width="10" height="16" rx="1.5" fill="white" stroke="#bbb" stroke-width="0.7" transform="rotate(-15,7,22)"/>
+              <rect x="10" y="10" width="10" height="16" rx="1.5" fill="white" stroke="#bbb" stroke-width="0.7" transform="rotate(-7,15,18)"/>
+              <rect x="19" y="8" width="10" height="16" rx="1.5" fill="white" stroke="#bbb" stroke-width="0.7"/>
+              <rect x="28" y="10" width="10" height="16" rx="1.5" fill="white" stroke="#bbb" stroke-width="0.7" transform="rotate(7,33,18)"/>
+              <rect x="36" y="14" width="10" height="16" rx="1.5" fill="white" stroke="#bbb" stroke-width="0.7" transform="rotate(15,41,22)"/>
+              <text x="20" y="22" font-size="9" fill="#c00" font-family="serif" text-anchor="middle">♦</text>
+            </svg>
+          </div>
+          <span class="scenes3d-label">5-Card Poker</span>
+        </div>
+
+        <div class="games-item scenes3d-item" data-app="baccarat" title="Double-click to play Baccarat">
+          <div class="scenes3d-icon">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="48" height="48" rx="3" fill="#1a4a1a"/>
+              <ellipse cx="24" cy="24" rx="20" ry="14" fill="none" stroke="#f5d97a" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <rect x="8" y="14" width="13" height="19" rx="2" fill="white" stroke="#ccc" stroke-width="0.8"/>
+              <text x="11" y="27" font-size="10" fill="#222" font-family="serif">♣</text>
+              <text x="11" y="19" font-size="6" fill="#222">8</text>
+              <rect x="27" y="14" width="13" height="19" rx="2" fill="white" stroke="#ccc" stroke-width="0.8"/>
+              <text x="30" y="27" font-size="10" fill="#cc0000" font-family="serif">♦</text>
+              <text x="30" y="19" font-size="6" fill="#cc0000">9</text>
+            </svg>
+          </div>
+          <span class="scenes3d-label">Baccarat</span>
+        </div>
+
+      </div>
+      <div class="scenes3d-statusbar">7 objects</div>
+    </div>
+  </template>
+
+  <!-- ===== TETRIS ===== -->
+  <template id="tpl-tetris">
+    <div class="tetris-wrap">
+      <div class="tetris-sidebar">
+        <div class="tetris-next-label">NEXT</div>
+        <canvas class="tetris-next" width="80" height="80"></canvas>
+        <div class="tetris-info">
+          <div class="tetris-info-row"><span>SCORE</span><span class="tetris-score">0</span></div>
+          <div class="tetris-info-row"><span>LINES</span><span class="tetris-lines">0</span></div>
+          <div class="tetris-info-row"><span>LEVEL</span><span class="tetris-level">1</span></div>
+        </div>
+        <button class="tetris-btn" id="tetris-start-btn">START</button>
+        <div class="tetris-controls">
+          <div>← → Move</div>
+          <div>↑ Rotate</div>
+          <div>↓ Soft Drop</div>
+          <div>Space Hard Drop</div>
+          <div>P Pause</div>
+        </div>
+      </div>
+      <div class="tetris-board-wrap">
+        <canvas class="tetris-board" width="200" height="400"></canvas>
+        <div class="tetris-overlay" style="display:none"></div>
+      </div>
+    </div>
+  </template>
+
+  <!-- ===== BLACKJACK ===== -->
+  <template id="tpl-blackjack">
+    <div class="casino-wrap bj-wrap">
+      <div class="casino-felt">
+        <div class="casino-title">♠ BLACKJACK ♠</div>
+        <div class="casino-balance-bar">
+          <span>Balance: $<span class="casino-balance">1000</span></span>
+          <span>Bet: $<span class="casino-bet-display">0</span></span>
+        </div>
+        <div class="bj-dealer-area">
+          <div class="casino-area-label">DEALER</div>
+          <div class="bj-hand dealer-hand"></div>
+          <div class="bj-score dealer-score"></div>
+        </div>
+        <div class="bj-player-area">
+          <div class="casino-area-label">PLAYER</div>
+          <div class="bj-hand player-hand"></div>
+          <div class="bj-score player-score"></div>
+        </div>
+        <div class="casino-msg bj-msg"></div>
+        <div class="casino-bet-btns">
+          <span class="casino-bet-label">BET:</span>
+          <button class="casino-chip" data-amount="5">$5</button>
+          <button class="casino-chip" data-amount="10">$10</button>
+          <button class="casino-chip" data-amount="25">$25</button>
+          <button class="casino-chip" data-amount="50">$50</button>
+          <button class="casino-chip" data-amount="100">$100</button>
+          <button class="casino-chip casino-chip-clear">✕ Clear</button>
+        </div>
+        <div class="casino-action-btns">
+          <button class="casino-btn bj-deal-btn">Deal</button>
+          <button class="casino-btn bj-hit-btn" disabled>Hit</button>
+          <button class="casino-btn bj-stand-btn" disabled>Stand</button>
+          <button class="casino-btn bj-double-btn" disabled>Double</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- ===== 5-CARD DRAW POKER ===== -->
+  <template id="tpl-poker">
+    <div class="casino-wrap poker-wrap">
+      <div class="casino-felt">
+        <div class="casino-title">♦ 5-CARD DRAW POKER ♦</div>
+        <div class="casino-balance-bar">
+          <span>Balance: $<span class="casino-balance">1000</span></span>
+          <span>Bet: $<span class="casino-bet-display">0</span></span>
+        </div>
+        <div class="poker-hand-area">
+          <div class="poker-hand"></div>
+        </div>
+        <div class="casino-msg poker-msg">Place your bet and click Deal!</div>
+        <div class="poker-hand-name"></div>
+        <div class="casino-bet-btns">
+          <span class="casino-bet-label">BET:</span>
+          <button class="casino-chip" data-amount="5">$5</button>
+          <button class="casino-chip" data-amount="10">$10</button>
+          <button class="casino-chip" data-amount="25">$25</button>
+          <button class="casino-chip" data-amount="50">$50</button>
+          <button class="casino-chip" data-amount="100">$100</button>
+          <button class="casino-chip casino-chip-clear">✕ Clear</button>
+        </div>
+        <div class="casino-action-btns">
+          <button class="casino-btn poker-deal-btn">Deal</button>
+          <button class="casino-btn poker-draw-btn" disabled>Draw</button>
+        </div>
+        <div class="poker-payout-table">
+          <div class="poker-payout-title">Payouts</div>
+          <div class="poker-payout-row"><span>Royal Flush</span><span>250x</span></div>
+          <div class="poker-payout-row"><span>Straight Flush</span><span>50x</span></div>
+          <div class="poker-payout-row"><span>Four of a Kind</span><span>25x</span></div>
+          <div class="poker-payout-row"><span>Full House</span><span>9x</span></div>
+          <div class="poker-payout-row"><span>Flush</span><span>6x</span></div>
+          <div class="poker-payout-row"><span>Straight</span><span>4x</span></div>
+          <div class="poker-payout-row"><span>Three of a Kind</span><span>3x</span></div>
+          <div class="poker-payout-row"><span>Two Pair</span><span>2x</span></div>
+          <div class="poker-payout-row"><span>Jacks or Better</span><span>1x</span></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- ===== BACCARAT ===== -->
+  <template id="tpl-baccarat">
+    <div class="casino-wrap baccarat-wrap">
+      <div class="casino-felt">
+        <div class="casino-title">♣ BACCARAT ♣</div>
+        <div class="casino-balance-bar">
+          <span>Balance: $<span class="casino-balance">1000</span></span>
+          <span>Bet: $<span class="casino-bet-display">0</span></span>
+        </div>
+        <div class="baccarat-tables">
+          <div class="baccarat-side player-side">
+            <div class="casino-area-label">PLAYER</div>
+            <div class="baccarat-hand player-hand"></div>
+            <div class="baccarat-score player-score">0</div>
+          </div>
+          <div class="baccarat-vs">VS</div>
+          <div class="baccarat-side banker-side">
+            <div class="casino-area-label">BANKER</div>
+            <div class="baccarat-hand banker-hand"></div>
+            <div class="baccarat-score banker-score">0</div>
+          </div>
+        </div>
+        <div class="casino-msg baccarat-msg">Place your bet on Player, Banker, or Tie!</div>
+        <div class="baccarat-bet-btns">
+          <div class="baccarat-side-bets">
+            <button class="baccarat-side-btn" data-side="player">BET PLAYER <span class="baccarat-side-odds">(1:1)</span></button>
+            <button class="baccarat-side-btn" data-side="tie">BET TIE <span class="baccarat-side-odds">(8:1)</span></button>
+            <button class="baccarat-side-btn" data-side="banker">BET BANKER <span class="baccarat-side-odds">(0.95:1)</span></button>
+          </div>
+          <div class="casino-bet-btns">
+            <span class="casino-bet-label">AMOUNT:</span>
+            <button class="casino-chip" data-amount="5">$5</button>
+            <button class="casino-chip" data-amount="10">$10</button>
+            <button class="casino-chip" data-amount="25">$25</button>
+            <button class="casino-chip" data-amount="50">$50</button>
+            <button class="casino-chip" data-amount="100">$100</button>
+            <button class="casino-chip casino-chip-clear">✕ Clear</button>
+          </div>
+        </div>
+        <div class="casino-action-btns">
+          <button class="casino-btn baccarat-deal-btn" disabled>Deal</button>
+          <button class="casino-btn baccarat-new-btn">New Round</button>
+        </div>
+        <div class="baccarat-history">
+          <span class="baccarat-hist-label">History:</span>
+          <div class="baccarat-hist-dots"></div>
+        </div>
       </div>
     </div>
   </template>

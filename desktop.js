@@ -56,7 +56,11 @@ const APP_CONFIG = {
   ckprojects:    { title: 'CK Projects',        icon: 'icon-ckprojects',  width: 460, height: 360, tpl: 'tpl-ckprojects',  onOpen: initCkProjects },
   legalnotice:   { title: 'Legal Notice',        icon: 'icon-legalnotice', width: 480, height: 500, tpl: 'tpl-legalnotice',  onOpen: null },
   conwaylife:    { title: "Conway's Game of Life", icon: 'icon-conwaylife', width: 700, height: 560, tpl: 'tpl-conwaylife',   onOpen: initConwayLife },
-  games:         { title: 'Games',                 icon: 'icon-games',       width: 460, height: 340, tpl: 'tpl-games',         onOpen: initGames },
+  games:         { title: 'Games',                 icon: 'icon-games',       width: 560, height: 420, tpl: 'tpl-games',         onOpen: initGames },
+  tetris:        { title: 'Tetris',                icon: 'icon-tetris',       width: 280, height: 580, tpl: 'tpl-tetris',        onOpen: initTetris },
+  blackjack:     { title: 'Blackjack',             icon: 'icon-blackjack',    width: 620, height: 500, tpl: 'tpl-blackjack',     onOpen: initBlackjack },
+  poker:         { title: '5-Card Draw Poker',     icon: 'icon-poker',        width: 680, height: 520, tpl: 'tpl-poker',         onOpen: initPoker },
+  baccarat:      { title: 'Baccarat',              icon: 'icon-baccarat',     width: 640, height: 500, tpl: 'tpl-baccarat',      onOpen: initBaccarat },
 };
 
 const APP_ICONS = {
@@ -83,6 +87,10 @@ const APP_ICONS = {
   legalnotice: `<svg viewBox="0 0 16 16" width="16" height="16"><circle cx="8" cy="8" r="7" fill="#f57f17" stroke="#e65100" stroke-width="0.8"/><text x="8" y="12" font-size="10" fill="white" font-weight="bold" font-family="sans-serif" text-anchor="middle">!</text></svg>`,
   conwaylife:  `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="0" y="0" width="16" height="16" fill="#0a0e1a"/><rect x="9" y="1" width="3" height="3" fill="#00e5ff"/><rect x="5" y="5" width="3" height="3" fill="#00e5ff"/><rect x="9" y="5" width="3" height="3" fill="#00e5ff"/><rect x="13" y="5" width="3" height="3" fill="#00e5ff"/><rect x="9" y="9" width="3" height="3" fill="#00e5ff" opacity="0.7"/></svg>`,
   games:       `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="1" y="4" width="14" height="11" rx="1" fill="#d4e8d0" stroke="#4a7c59" stroke-width="0.8"/><rect x="1" y="1" width="4" height="4" rx="1" fill="#f5d97a" stroke="#c9a000" stroke-width="0.8"/><circle cx="6" cy="10" r="2" fill="#c0c0c0" stroke="#808080" stroke-width="0.5"/><rect x="9" y="9" width="4" height="4" rx="0.5" fill="white" stroke="#999" stroke-width="0.4"/><text x="10.5" y="12.5" font-size="4" fill="#cc0000" font-family="serif" text-anchor="middle">♥</text></svg>`,
+  tetris:      `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="0" y="0" width="16" height="16" fill="#000"/><rect x="1" y="1" width="4" height="4" fill="#00e5ff"/><rect x="5" y="1" width="4" height="4" fill="#00e5ff"/><rect x="1" y="5" width="4" height="4" fill="#ff4081"/><rect x="9" y="5" width="4" height="4" fill="#ff4081"/><rect x="5" y="9" width="4" height="4" fill="#76ff03"/><rect x="9" y="9" width="4" height="4" fill="#76ff03"/><rect x="1" y="13" width="4" height="2" fill="#ffab00"/><rect x="5" y="13" width="4" height="2" fill="#ffab00"/><rect x="9" y="13" width="4" height="2" fill="#ffab00"/></svg>`,
+  blackjack:   `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="1" y="1" width="6" height="9" rx="1" fill="white" stroke="#bbb" stroke-width="0.6"/><text x="2" y="8" font-size="6" fill="#222" font-family="serif">♠</text><rect x="9" y="4" width="6" height="9" rx="1" fill="white" stroke="#bbb" stroke-width="0.6"/><text x="10" y="11" font-size="6" fill="#c00" font-family="serif">♥</text><text x="10" y="3" font-size="4" fill="#c00" font-family="sans-serif" font-weight="bold">21</text></svg>`,
+  poker:       `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="0" y="3" width="5" height="7" rx="0.8" fill="white" stroke="#aaa" stroke-width="0.5"/><rect x="3" y="2" width="5" height="7" rx="0.8" fill="white" stroke="#aaa" stroke-width="0.5"/><rect x="6" y="1" width="5" height="7" rx="0.8" fill="white" stroke="#aaa" stroke-width="0.5"/><rect x="9" y="2" width="5" height="7" rx="0.8" fill="white" stroke="#aaa" stroke-width="0.5"/><rect x="12" y="3" width="4" height="7" rx="0.8" fill="white" stroke="#aaa" stroke-width="0.5"/><text x="7" y="13" font-size="4" fill="#c00" font-family="serif" text-anchor="middle">♦</text></svg>`,
+  baccarat:    `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="0" y="0" width="16" height="16" rx="2" fill="#1a4a1a"/><rect x="2" y="3" width="5" height="7" rx="1" fill="white" stroke="#ccc" stroke-width="0.5"/><text x="3" y="9" font-size="5" fill="#222" font-family="serif">♣</text><rect x="9" y="3" width="5" height="7" rx="1" fill="white" stroke="#ccc" stroke-width="0.5"/><text x="10" y="9" font-size="5" fill="#c00" font-family="serif">♦</text><rect x="5" y="11" width="6" height="1.5" rx="0.5" fill="#f5d97a"/></svg>`,
 };
 
 // ---- Utilities ----
@@ -969,6 +977,538 @@ function initScenes3d(content) {
       item.classList.add('selected');
     });
   });
+}
+
+
+// ============================
+// TETRIS
+// ============================
+function initTetris(content) {
+  const canvas  = content.querySelector('.tetris-board');
+  const nextCvs = content.querySelector('.tetris-next');
+  const overlay = content.querySelector('.tetris-overlay');
+  const startBtn = content.querySelector('#tetris-start-btn');
+  const scoreEl = content.querySelector('.tetris-score');
+  const linesEl = content.querySelector('.tetris-lines');
+  const levelEl = content.querySelector('.tetris-level');
+  const ctx  = canvas.getContext('2d');
+  const nctx = nextCvs.getContext('2d');
+
+  const COLS = 10, ROWS = 20, SZ = 20;
+  const COLORS = ['', '#00e5ff','#ff4081','#76ff03','#ffab00','#e040fb','#ff6d00','#1de9b6'];
+  const SHAPES = [
+    [],
+    [[1,1,1,1]],
+    [[2,0],[2,0],[2,2]],
+    [[0,3],[0,3],[3,3]],
+    [[4,4],[4,4]],
+    [[0,5,5],[5,5,0]],
+    [[6,6,0],[0,6,6]],
+    [[0,7,0],[7,7,7]],
+  ];
+
+  let board, piece, nextPiece, score, lines, level, speed, rafId, paused, running;
+
+  function newBoard() { return Array.from({length:ROWS}, ()=>Array(COLS).fill(0)); }
+
+  function randomPiece() {
+    const t = Math.floor(Math.random()*7)+1;
+    const s = SHAPES[t].map(r=>[...r]);
+    return { t, s, x: Math.floor((COLS - s[0].length)/2), y: 0 };
+  }
+
+  function rotate(s) {
+    const r = s[0].length, c = s.length;
+    return Array.from({length:r}, (_,i)=>Array.from({length:c}, (_,j)=>s[c-1-j][i]));
+  }
+
+  function valid(s, x, y) {
+    return s.every((row,r)=>row.every((v,c)=>{
+      if (!v) return true;
+      const nx=x+c, ny=y+r;
+      return nx>=0&&nx<COLS&&ny>=0&&ny<ROWS&&!board[ny][nx];
+    }));
+  }
+
+  function place() {
+    piece.s.forEach((row,r)=>row.forEach((v,c)=>{
+      if (v) board[piece.y+r][piece.x+c]=v;
+    }));
+    let cleared=0;
+    for (let r=ROWS-1;r>=0;r--) {
+      if (board[r].every(v=>v)) { board.splice(r,1); board.unshift(Array(COLS).fill(0)); cleared++; r++; }
+    }
+    const pts=[0,100,300,500,800];
+    score += (pts[cleared]||0)*level;
+    lines += cleared;
+    level = Math.floor(lines/10)+1;
+    speed = Math.max(100, 800 - (level-1)*70);
+    scoreEl.textContent = score;
+    linesEl.textContent = lines;
+    levelEl.textContent = level;
+    piece = nextPiece;
+    nextPiece = randomPiece();
+    drawNext();
+    if (!valid(piece.s, piece.x, piece.y)) gameOver();
+  }
+
+  function drawBlock(c, r, v, context, sz, ox=0, oy=0) {
+    context.fillStyle = COLORS[v];
+    context.fillRect(ox+c*sz+1, oy+r*sz+1, sz-2, sz-2);
+    context.fillStyle = 'rgba(255,255,255,0.25)';
+    context.fillRect(ox+c*sz+1, oy+r*sz+1, sz-2, 3);
+  }
+
+  function drawBoard() {
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0,0,COLS*SZ,ROWS*SZ);
+    ctx.strokeStyle='rgba(255,255,255,0.05)';
+    ctx.lineWidth=0.5;
+    for(let r=0;r<ROWS;r++){ctx.beginPath();ctx.moveTo(0,r*SZ);ctx.lineTo(COLS*SZ,r*SZ);ctx.stroke();}
+    for(let c=0;c<COLS;c++){ctx.beginPath();ctx.moveTo(c*SZ,0);ctx.lineTo(c*SZ,ROWS*SZ);ctx.stroke();}
+    board.forEach((row,r)=>row.forEach((v,c)=>{ if(v) drawBlock(c,r,v,ctx,SZ); }));
+    if (piece) {
+      let gy = piece.y;
+      while(valid(piece.s,piece.x,gy+1)) gy++;
+      piece.s.forEach((row,r)=>row.forEach((v,c)=>{
+        if(v){ ctx.fillStyle='rgba(255,255,255,0.12)'; ctx.fillRect((piece.x+c)*SZ+1,(gy+r)*SZ+1,SZ-2,SZ-2); }
+      }));
+      piece.s.forEach((row,r)=>row.forEach((v,c)=>{ if(v) drawBlock(piece.x+c,piece.y+r,v,ctx,SZ); }));
+    }
+  }
+
+  function drawNext() {
+    nctx.fillStyle='#111'; nctx.fillRect(0,0,80,80);
+    const s=nextPiece.s, sz=16;
+    const ox=Math.floor((80-s[0].length*sz)/2), oy=Math.floor((80-s.length*sz)/2);
+    s.forEach((row,r)=>row.forEach((v,c)=>{ if(v) drawBlock(c,r,v,nctx,sz,ox,oy); }));
+  }
+
+  let lastTime=0, dropAcc=0;
+  function loop(ts) {
+    if (!running||paused) return;
+    const dt = ts-lastTime; lastTime=ts; dropAcc+=dt;
+    if (dropAcc>=speed) { dropAcc=0; moveDown(); }
+    drawBoard();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function moveDown() {
+    if (valid(piece.s,piece.x,piece.y+1)) piece.y++;
+    else place();
+  }
+
+  function gameOver() {
+    running=false; cancelAnimationFrame(rafId);
+    overlay.textContent='GAME OVER';
+    overlay.style.display='flex';
+    startBtn.textContent='RESTART';
+  }
+
+  function start() {
+    board=newBoard(); score=0; lines=0; level=1; speed=800;
+    scoreEl.textContent=0; linesEl.textContent=0; levelEl.textContent=1;
+    piece=randomPiece(); nextPiece=randomPiece(); drawNext();
+    paused=false; running=true;
+    overlay.style.display='none';
+    startBtn.textContent='PAUSE';
+    lastTime=0; dropAcc=0;
+    cancelAnimationFrame(rafId);
+    rafId=requestAnimationFrame(loop);
+  }
+
+  startBtn.addEventListener('click', ()=>{
+    if (!running) { start(); return; }
+    paused=!paused;
+    startBtn.textContent=paused?'RESUME':'PAUSE';
+    if (!paused) { lastTime=0; rafId=requestAnimationFrame(loop); }
+  });
+
+  const keyMap = {
+    ArrowLeft: ()=>{ if(piece&&valid(piece.s,piece.x-1,piece.y)){ piece.x--; drawBoard(); } },
+    ArrowRight:()=>{ if(piece&&valid(piece.s,piece.x+1,piece.y)){ piece.x++; drawBoard(); } },
+    ArrowDown: ()=>{ if(piece){ moveDown(); dropAcc=0; drawBoard(); } },
+    ArrowUp:   ()=>{ if(piece){ const r=rotate(piece.s); if(valid(r,piece.x,piece.y)){ piece.s=r; drawBoard(); } } },
+    ' ':       ()=>{ if(piece){ while(valid(piece.s,piece.x,piece.y+1)) piece.y++; place(); drawBoard(); } },
+    p:         ()=>{ if(running){ paused=!paused; startBtn.textContent=paused?'RESUME':'PAUSE'; if(!paused){lastTime=0;rafId=requestAnimationFrame(loop);} } },
+    P:         ()=>keyMap['p'](),
+  };
+
+  function onTetrisKey(e) {
+    if (!running||paused&&e.key!=='p'&&e.key!=='P') return;
+    if (!keyMap[e.key]) return;
+    if (['ArrowLeft','ArrowRight','ArrowDown','ArrowUp',' '].includes(e.key)) e.preventDefault();
+    keyMap[e.key]();
+  }
+  document.addEventListener('keydown', onTetrisKey);
+
+  const winId = Object.keys(windows).find(k=>windows[k] && windows[k].el && windows[k].el.contains(canvas));
+  if (winId) {
+    windows[winId].el.querySelector('.win-close')?.addEventListener('click', ()=>{
+      cancelAnimationFrame(rafId);
+      document.removeEventListener('keydown', onTetrisKey);
+    }, {once:true});
+  }
+
+  board=newBoard(); drawBoard();
+  overlay.style.cssText='display:flex;align-items:center;justify-content:center;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.65);color:#fff;font-size:22px;font-weight:bold;letter-spacing:2px;pointer-events:none;z-index:10;';
+  overlay.textContent='Press START';
+  overlay.style.display='flex';
+}
+
+// ============================
+// CASINO HELPERS
+// ============================
+function makeDeck() {
+  const suits=['♠','♥','♦','♣'], vals=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+  const d=[];
+  for(const s of suits) for(const v of vals) d.push({s,v});
+  return d;
+}
+function shuffleDeck(d) { for(let i=d.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [d[i],d[j]]=[d[j],d[i]]; } return d; }
+function cardVal(v) { if(['J','Q','K'].includes(v)) return 10; if(v==='A') return 11; return parseInt(v); }
+function renderCard(card, faceDown=false) {
+  if (faceDown) return `<div class="casino-card face-down"><span class="card-suit">🂠</span></div>`;
+  const red = card.s==='♥'||card.s==='♦';
+  return `<div class="casino-card${red?' red':''}"><span class="card-top">${card.v}</span><span class="card-suit">${card.s}</span></div>`;
+}
+function setupCasinoBetBtns(content, getBet, setBet, getBalance) {
+  content.querySelectorAll('.casino-chip:not(.casino-chip-clear)').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const amt = parseInt(btn.dataset.amount);
+      if (getBet()+amt > getBalance()) return;
+      setBet(getBet()+amt);
+    });
+  });
+  const clr = content.querySelector('.casino-chip-clear');
+  if(clr) clr.addEventListener('click', ()=>setBet(0));
+}
+
+// ============================
+// BLACKJACK
+// ============================
+function initBlackjack(content) {
+  let balance=1000, bet=0, deck=[], state='betting';
+  let playerHand=[], dealerHand=[];
+
+  const balEl    = content.querySelector('.casino-balance');
+  const betEl    = content.querySelector('.casino-bet-display');
+  const msgEl    = content.querySelector('.bj-msg');
+  const dealerHandEl  = content.querySelector('.dealer-hand');
+  const playerHandEl  = content.querySelector('.player-hand');
+  const dealerScoreEl = content.querySelector('.dealer-score');
+  const playerScoreEl = content.querySelector('.player-score');
+  const dealBtn  = content.querySelector('.bj-deal-btn');
+  const hitBtn   = content.querySelector('.bj-hit-btn');
+  const standBtn = content.querySelector('.bj-stand-btn');
+  const dblBtn   = content.querySelector('.bj-double-btn');
+
+  function updateUI() { balEl.textContent=balance; betEl.textContent=bet; }
+  function setBet(v){ bet=v; updateUI(); }
+  function getBet(){ return bet; }
+  function getBalance(){ return balance; }
+
+  setupCasinoBetBtns(content, getBet, setBet, getBalance);
+
+  function bjScore(hand, hideSecond=false) {
+    const cards = hideSecond ? [hand[0]] : hand;
+    let s=0, aces=0;
+    for(const c of cards){ let v=cardVal(c.v); if(v===11) aces++; s+=v; }
+    while(s>21&&aces>0){ s-=10; aces--; }
+    return s;
+  }
+
+  function renderHands(hideDealer=true) {
+    dealerHandEl.innerHTML = dealerHand.map((c,i)=>renderCard(c, hideDealer&&i===1)).join('');
+    playerHandEl.innerHTML = playerHand.map(c=>renderCard(c)).join('');
+    playerScoreEl.textContent = 'Score: '+bjScore(playerHand);
+    dealerScoreEl.textContent = hideDealer ? '' : 'Score: '+bjScore(dealerHand);
+  }
+
+  function setActionBtns(playing) {
+    hitBtn.disabled = !playing;
+    standBtn.disabled = !playing;
+    dblBtn.disabled = !playing;
+    dealBtn.disabled = playing;
+  }
+
+  function deal() {
+    if (bet<=0) { msgEl.textContent='Place a bet first!'; return; }
+    if (bet>balance) { msgEl.textContent='Not enough balance!'; return; }
+    balance-=bet; updateUI();
+    deck=shuffleDeck(makeDeck());
+    playerHand=[deck.pop(), deck.pop()];
+    dealerHand=[deck.pop(), deck.pop()];
+    state='playing';
+    setActionBtns(true);
+    dblBtn.disabled = balance<bet;
+    msgEl.textContent='';
+    renderHands(true);
+    if (bjScore(playerHand)===21) { stand(); }
+  }
+
+  function hit() {
+    playerHand.push(deck.pop());
+    renderHands(true);
+    if (bjScore(playerHand)>21) { endGame('bust'); }
+  }
+
+  function stand() {
+    while(bjScore(dealerHand)<17) dealerHand.push(deck.pop());
+    renderHands(false);
+    const ps=bjScore(playerHand), ds=bjScore(dealerHand);
+    if (ps>21) endGame('bust');
+    else if (ds>21||ps>ds) endGame('win');
+    else if (ps===ds) endGame('push');
+    else endGame('lose');
+  }
+
+  function doubleDown() {
+    if (balance<bet) return;
+    balance-=bet; bet*=2; updateUI();
+    playerHand.push(deck.pop());
+    renderHands(true);
+    if (bjScore(playerHand)>21) endGame('bust');
+    else stand();
+  }
+
+  function endGame(result) {
+    state='done';
+    setActionBtns(false);
+    renderHands(false);
+    if (result==='win') {
+      const isNat=bjScore(playerHand)===21&&playerHand.length===2;
+      if (isNat) { const w=bet+Math.floor(bet*1.5); balance+=w; msgEl.textContent=`Blackjack! You win $${w}! 🎰`; }
+      else { balance+=bet*2; msgEl.textContent=`You win $${bet*2}! 🎉`; }
+    } else if (result==='push') { balance+=bet; msgEl.textContent=`Push — bet returned ($${bet}).`; }
+    else if (result==='bust') { msgEl.textContent='Bust! You lose.'; }
+    else { msgEl.textContent=`Dealer wins. You lose $${bet}.`; }
+    updateUI();
+    if (balance<=0) {
+      msgEl.textContent+=' Game over! Reloading...';
+      setTimeout(()=>{ balance=1000; bet=0; updateUI(); msgEl.textContent='Balance reset to $1000.'; playerHandEl.innerHTML=''; dealerHandEl.innerHTML=''; playerScoreEl.textContent=''; dealerScoreEl.textContent=''; },2000);
+    }
+    bet=0;
+  }
+
+  dealBtn.addEventListener('click', deal);
+  hitBtn.addEventListener('click', hit);
+  standBtn.addEventListener('click', stand);
+  dblBtn.addEventListener('click', doubleDown);
+  updateUI();
+}
+
+// ============================
+// 5-CARD DRAW POKER
+// ============================
+function initPoker(content) {
+  let balance=1000, bet=0, deck=[], hand=[], held=[], state='betting';
+
+  const balEl   = content.querySelector('.casino-balance');
+  const betEl   = content.querySelector('.casino-bet-display');
+  const msgEl   = content.querySelector('.poker-msg');
+  const handEl  = content.querySelector('.poker-hand');
+  const nameEl  = content.querySelector('.poker-hand-name');
+  const dealBtn = content.querySelector('.poker-deal-btn');
+  const drawBtn = content.querySelector('.poker-draw-btn');
+
+  function updateUI(){ balEl.textContent=balance; betEl.textContent=bet; }
+  function setBet(v){ bet=v; updateUI(); }
+  function getBet(){ return bet; }
+  function getBalance(){ return balance; }
+
+  setupCasinoBetBtns(content, getBet, setBet, getBalance);
+
+  function renderHand() {
+    handEl.innerHTML = hand.map((c,i)=>{
+      const red=c.s==='♥'||c.s==='♦';
+      const isHeld=held.includes(i);
+      return `<div class="casino-card${red?' red':''} poker-card${isHeld?' held':''}" data-idx="${i}">
+        <span class="card-top">${c.v}</span><span class="card-suit">${c.s}</span>
+        <span class="hold-label">${isHeld?'HELD':''}</span>
+      </div>`;
+    }).join('');
+    handEl.querySelectorAll('.poker-card').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        if (state!=='drawing') return;
+        const idx=parseInt(el.dataset.idx);
+        if (held.includes(idx)) held=held.filter(h=>h!==idx);
+        else held.push(idx);
+        renderHand();
+      });
+    });
+  }
+
+  function rankIdx(v){ return ['2','3','4','5','6','7','8','9','10','J','Q','K','A'].indexOf(v); }
+
+  function evalHand(h) {
+    const vals=h.map(c=>c.v), suits=h.map(c=>c.s);
+    const idxs=vals.map(rankIdx).sort((a,b)=>a-b);
+    const counts={};
+    for(const v of vals) counts[v]=(counts[v]||0)+1;
+    const freq=Object.values(counts).sort((a,b)=>b-a);
+    const flush = suits.every(s=>s===suits[0]);
+    const straight = (idxs[4]-idxs[0]===4&&new Set(idxs).size===5) ||
+                     (vals.includes('A')&&vals.includes('2')&&vals.includes('3')&&vals.includes('4')&&vals.includes('5'));
+    const royal = flush&&straight&&vals.includes('A')&&vals.includes('K');
+    if (royal)                    return {name:'Royal Flush',   mult:250};
+    if (flush&&straight)          return {name:'Straight Flush',mult:50};
+    if (freq[0]===4)               return {name:'Four of a Kind',mult:25};
+    if (freq[0]===3&&freq[1]===2)  return {name:'Full House',   mult:9};
+    if (flush)                     return {name:'Flush',         mult:6};
+    if (straight)                  return {name:'Straight',      mult:4};
+    if (freq[0]===3)               return {name:'Three of a Kind',mult:3};
+    if (freq[0]===2&&freq[1]===2)  return {name:'Two Pair',     mult:2};
+    const pairs=Object.entries(counts).filter(([,c])=>c>=2).map(([v])=>v);
+    if (pairs.some(v=>['J','Q','K','A'].includes(v))) return {name:'Jacks or Better',mult:1};
+    return {name:'No Win',mult:0};
+  }
+
+  function deal() {
+    if (bet<=0){ msgEl.textContent='Place a bet first!'; return; }
+    if (bet>balance){ msgEl.textContent='Not enough balance!'; return; }
+    balance-=bet; updateUI();
+    deck=shuffleDeck(makeDeck());
+    hand=[deck.pop(),deck.pop(),deck.pop(),deck.pop(),deck.pop()];
+    held=[];
+    state='drawing';
+    dealBtn.disabled=true; drawBtn.disabled=false;
+    nameEl.textContent=''; msgEl.textContent='Click cards to HOLD, then Draw.';
+    renderHand();
+  }
+
+  function draw() {
+    hand=hand.map((c,i)=>held.includes(i)?c:deck.pop());
+    state='done';
+    drawBtn.disabled=true; dealBtn.disabled=false;
+    const result=evalHand(hand);
+    nameEl.textContent=result.name;
+    held=hand.map((_,i)=>i); renderHand();
+    held=[];
+    if (result.mult>0) {
+      const win=bet*result.mult;
+      balance+=win;
+      msgEl.textContent=`${result.name}! You win $${win}! 🎉`;
+    } else {
+      msgEl.textContent=`${result.name}. You lose $${bet}.`;
+    }
+    bet=0; updateUI();
+    if (balance<=0){ msgEl.textContent+=' Game over! Reloading...'; setTimeout(()=>{ balance=1000; updateUI(); msgEl.textContent='Balance reset to $1000.'; handEl.innerHTML=''; nameEl.textContent=''; },2000); }
+  }
+
+  dealBtn.addEventListener('click', deal);
+  drawBtn.addEventListener('click', draw);
+  updateUI();
+}
+
+// ============================
+// BACCARAT
+// ============================
+function initBaccarat(content) {
+  let balance=1000, bet=0, betSide='', deck=[];
+
+  const balEl   = content.querySelector('.casino-balance');
+  const betEl   = content.querySelector('.casino-bet-display');
+  const msgEl   = content.querySelector('.baccarat-msg');
+  const phEl    = content.querySelector('.player-hand');
+  const bhEl    = content.querySelector('.banker-hand');
+  const psEl    = content.querySelector('.player-score');
+  const bsEl    = content.querySelector('.banker-score');
+  const dealBtn = content.querySelector('.baccarat-deal-btn');
+  const newBtn  = content.querySelector('.baccarat-new-btn');
+  const histEl  = content.querySelector('.baccarat-hist-dots');
+
+  function updateUI(){ balEl.textContent=balance; betEl.textContent=bet; }
+  function setBet(v){ bet=v; updateUI(); dealBtn.disabled=(!betSide||bet<=0); }
+  function getBet(){ return bet; }
+  function getBalance(){ return balance; }
+
+  content.querySelectorAll('.casino-chip:not(.casino-chip-clear)').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const amt=parseInt(btn.dataset.amount);
+      if(getBet()+amt>getBalance()) return;
+      setBet(getBet()+amt);
+    });
+  });
+  const clr=content.querySelector('.casino-chip-clear');
+  if(clr) clr.addEventListener('click', ()=>setBet(0));
+
+  content.querySelectorAll('.baccarat-side-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      betSide=btn.dataset.side;
+      content.querySelectorAll('.baccarat-side-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      dealBtn.disabled = (bet<=0);
+      msgEl.textContent=`Betting on ${betSide.toUpperCase()}. Set amount and click Deal.`;
+    });
+  });
+
+  function bacScore(hand){ return hand.reduce((s,c)=>{ const v=cardVal(c.v); return s+(v>=10?0:v); },0)%10; }
+
+  function dealRound() {
+    if (!betSide){ msgEl.textContent='Choose Player, Banker, or Tie first!'; return; }
+    if (bet<=0){ msgEl.textContent='Place a bet first!'; return; }
+    balance-=bet; updateUI();
+    deck=shuffleDeck(makeDeck());
+    let ph=[deck.pop(),deck.pop()];
+    let bh=[deck.pop(),deck.pop()];
+    let ps=bacScore(ph), bs=bacScore(bh);
+
+    const natural = ps>=8||bs>=8;
+    if (!natural) {
+      if (ps<=5){ ph.push(deck.pop()); ps=bacScore(ph); }
+      const p3=ph[2]?cardVal(ph[2].v)%10:null;
+      if (p3===null) { if(bs<=5) bh.push(deck.pop()); }
+      else {
+        if(bs<=2||(bs===3&&p3!==8)||(bs===4&&[2,3,4,5,6,7].includes(p3))||(bs===5&&[4,5,6,7].includes(p3))||(bs===6&&[6,7].includes(p3)))
+          bh.push(deck.pop());
+      }
+      bs=bacScore(bh);
+    }
+
+    phEl.innerHTML=ph.map(c=>renderCard(c)).join('');
+    bhEl.innerHTML=bh.map(c=>renderCard(c)).join('');
+    psEl.textContent=ps; bsEl.textContent=bs;
+
+    let result;
+    if (ps>bs) result='player';
+    else if (bs>ps) result='banker';
+    else result='tie';
+
+    if (result===betSide) {
+      let payout;
+      if (betSide==='player') payout=bet*2;
+      else if (betSide==='banker') payout=Math.floor(bet*1.95);
+      else payout=bet*9;
+      balance+=payout;
+      msgEl.textContent=`${result.toUpperCase()} wins! You win $${payout}! 🎉`;
+    } else if (result==='tie'&&betSide!=='tie') {
+      balance+=bet;
+      msgEl.textContent='Tie! Bet returned.';
+    } else {
+      msgEl.textContent=`${result.toUpperCase()} wins. You lose $${bet}.`;
+    }
+
+    const dot=document.createElement('span');
+    dot.className='baccarat-dot baccarat-dot-'+result;
+    dot.title=result.toUpperCase()[0]; dot.textContent=result.toUpperCase()[0];
+    histEl.appendChild(dot);
+    if(histEl.children.length>20) histEl.removeChild(histEl.firstChild);
+
+    bet=0; betSide=''; updateUI();
+    content.querySelectorAll('.baccarat-side-btn').forEach(b=>b.classList.remove('active'));
+    dealBtn.disabled=true;
+    if (balance<=0){ msgEl.textContent+=' Game over! Reloading...'; setTimeout(()=>{ balance=1000; updateUI(); msgEl.textContent='Balance reset to $1000.'; phEl.innerHTML=''; bhEl.innerHTML=''; psEl.textContent='0'; bsEl.textContent='0'; },2000); }
+  }
+
+  newBtn.addEventListener('click', ()=>{
+    phEl.innerHTML=''; bhEl.innerHTML=''; psEl.textContent='0'; bsEl.textContent='0';
+    msgEl.textContent='Place your bet on Player, Banker, or Tie!';
+    bet=0; betSide=''; updateUI(); dealBtn.disabled=true;
+    content.querySelectorAll('.baccarat-side-btn').forEach(b=>b.classList.remove('active'));
+  });
+  dealBtn.addEventListener('click', dealRound);
+  updateUI();
 }
 
 // ============================
@@ -4084,3 +4624,8 @@ window.initCkProjects  = initCkProjects;
 window.initConwayLife  = initConwayLife;
 // Games folder
 window.initGames       = initGames;
+// New Games
+window.initTetris      = initTetris;
+window.initBlackjack   = initBlackjack;
+window.initPoker       = initPoker;
+window.initBaccarat    = initBaccarat;
