@@ -56,6 +56,7 @@ const APP_CONFIG = {
   ckprojects:    { title: 'CK Projects',        icon: 'icon-ckprojects',  width: 460, height: 360, tpl: 'tpl-ckprojects',  onOpen: initCkProjects },
   legalnotice:   { title: 'Legal Notice',        icon: 'icon-legalnotice', width: 480, height: 500, tpl: 'tpl-legalnotice',  onOpen: null },
   conwaylife:    { title: "Conway's Game of Life", icon: 'icon-conwaylife', width: 700, height: 560, tpl: 'tpl-conwaylife',   onOpen: initConwayLife },
+  games:         { title: 'Games',                 icon: 'icon-games',       width: 460, height: 340, tpl: 'tpl-games',         onOpen: initGames },
 };
 
 const APP_ICONS = {
@@ -81,6 +82,7 @@ const APP_ICONS = {
   ckprojects: `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="1" y="4" width="14" height="11" rx="1" fill="#0d1b3e" stroke="#4488ff" stroke-width="0.8"/><rect x="1" y="4" width="5" height="3" rx="0" fill="#1a3a6e" stroke="#4488ff" stroke-width="0.8"/><rect x="1" y="1" width="4" height="4" rx="1" fill="#1a3a6e" stroke="#4488ff" stroke-width="0.8"/><text x="4" y="13" font-size="6" fill="#00e5ff" font-weight="bold" font-family="sans-serif">ck</text></svg>`,
   legalnotice: `<svg viewBox="0 0 16 16" width="16" height="16"><circle cx="8" cy="8" r="7" fill="#f57f17" stroke="#e65100" stroke-width="0.8"/><text x="8" y="12" font-size="10" fill="white" font-weight="bold" font-family="sans-serif" text-anchor="middle">!</text></svg>`,
   conwaylife:  `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="0" y="0" width="16" height="16" fill="#0a0e1a"/><rect x="9" y="1" width="3" height="3" fill="#00e5ff"/><rect x="5" y="5" width="3" height="3" fill="#00e5ff"/><rect x="9" y="5" width="3" height="3" fill="#00e5ff"/><rect x="13" y="5" width="3" height="3" fill="#00e5ff"/><rect x="9" y="9" width="3" height="3" fill="#00e5ff" opacity="0.7"/></svg>`,
+  games:       `<svg viewBox="0 0 16 16" width="16" height="16"><rect x="1" y="4" width="14" height="11" rx="1" fill="#d4e8d0" stroke="#4a7c59" stroke-width="0.8"/><rect x="1" y="1" width="4" height="4" rx="1" fill="#f5d97a" stroke="#c9a000" stroke-width="0.8"/><circle cx="6" cy="10" r="2" fill="#c0c0c0" stroke="#808080" stroke-width="0.5"/><rect x="9" y="9" width="4" height="4" rx="0.5" fill="white" stroke="#999" stroke-width="0.4"/><text x="10.5" y="12.5" font-size="4" fill="#cc0000" font-family="serif" text-anchor="middle">♥</text></svg>`,
 };
 
 // ---- Utilities ----
@@ -964,6 +966,22 @@ function initScenes3d(content) {
     // Single click = select
     item.addEventListener('click', () => {
       content.querySelectorAll('.scenes3d-item').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+    });
+  });
+}
+
+// ============================
+// GAMES FOLDER
+// ============================
+function initGames(content) {
+  content.querySelectorAll('.games-item').forEach(item => {
+    item.addEventListener('dblclick', () => {
+      const app = item.dataset.app;
+      if (app) openApp(app);
+    });
+    item.addEventListener('click', () => {
+      content.querySelectorAll('.games-item').forEach(i => i.classList.remove('selected'));
       item.classList.add('selected');
     });
   });
@@ -2905,13 +2923,20 @@ function initMusicViz(content) {
   const pitchVal = content.querySelector('#musicviz-pitch-val');
   const reverbSlider = content.querySelector('#musicviz-reverb');
   const reverbVal = content.querySelector('#musicviz-reverb-val');
+  const bassSlider = content.querySelector('#musicviz-bass');
+  const bassVal = content.querySelector('#musicviz-bass-val');
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
   let audioCtx = null, analyser = null, sourceNode = null, gainNode = null;
   let convolverNode = null, reverbGainNode = null, dryGainNode = null;
+  let bassFilter = null;
   let audioEl = new Audio();
   audioEl.crossOrigin = 'anonymous';
+  // Keep the element volume at 1.0 – volume control is done via gainNode so
+  // there is no double-attenuation and no hidden lossy resampling from the
+  // browser's own volume path.
+  audioEl.volume = 1.0;
   let rafId = null;
   let vizMode = 'bars';
 
@@ -2931,7 +2956,7 @@ function initMusicViz(content) {
 
   function ensureAudio() {
     if (audioCtx) return;
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'playback' });
     analyser = audioCtx.createAnalyser();
     analyser.fftSize = 2048;
     analyser.smoothingTimeConstant = 0.82;
@@ -2939,7 +2964,11 @@ function initMusicViz(content) {
     gainNode = audioCtx.createGain();
     gainNode.gain.value = (volSlider ? volSlider.value / 100 : 0.8);
 
-    // Dry / wet split for reverb
+    bassFilter = audioCtx.createBiquadFilter();
+    bassFilter.type = 'lowShelf';
+    bassFilter.frequency.value = 200;
+    bassFilter.gain.value = 0;  // 0 dB = no effect until user moves slider
+
     dryGainNode = audioCtx.createGain();
     dryGainNode.gain.value = 1.0;
 
@@ -2951,18 +2980,62 @@ function initMusicViz(content) {
 
     sourceNode = audioCtx.createMediaElementSource(audioEl);
 
-    // sourceNode → analyser → gainNode (master volume)
-    sourceNode.connect(analyser);
-    analyser.connect(gainNode);
+    // Disable default browser time-stretching to prevent muddy transients on speed change
+    if ('preservesPitch' in audioEl) audioEl.preservesPitch = false;
 
-    // gainNode → dry path → destination
+    // ---- ROUTING ----
+    // Analyser is a dead-end branch so it never intercepts the main audio path
+    sourceNode.connect(analyser);
+
+    // By default: sourceNode -> gainNode -> dryGainNode -> destination
+    // The BiquadFilter (bass) is physically removed from the graph when at 0dB
+    // because even at 0dB, an IIR filter alters the phase response, causing a
+    // smeared/muddy sound.
+    sourceNode.connect(gainNode);
+
     gainNode.connect(dryGainNode);
     dryGainNode.connect(audioCtx.destination);
+  }
 
-    // gainNode → convolver → reverbGain → destination
+  // Track graph connections
+  let reverbConnected = false;
+  let bassConnected = false;
+
+  function ensureReverbConnected() {
+    if (reverbConnected || !audioCtx) return;
     gainNode.connect(convolverNode);
     convolverNode.connect(reverbGainNode);
     reverbGainNode.connect(audioCtx.destination);
+    reverbConnected = true;
+  }
+
+  function ensureReverbDisconnected() {
+    if (!reverbConnected || !audioCtx) return;
+    try { gainNode.disconnect(convolverNode); } catch (_) {}
+    try { convolverNode.disconnect(reverbGainNode); } catch (_) {}
+    try { reverbGainNode.disconnect(audioCtx.destination); } catch (_) {}
+    reverbConnected = false;
+  }
+
+  function updateBassRouting(v) {
+    if (!audioCtx) return;
+    if (v > 0) {
+      if (!bassConnected) {
+        sourceNode.disconnect(gainNode);
+        sourceNode.connect(bassFilter);
+        bassFilter.connect(gainNode);
+        bassConnected = true;
+      }
+      bassFilter.gain.setTargetAtTime(v, audioCtx.currentTime, 0.05);
+    } else {
+      if (bassConnected) {
+        sourceNode.disconnect(bassFilter);
+        bassFilter.disconnect(gainNode);
+        sourceNode.connect(gainNode);
+        bassConnected = false;
+      }
+      bassFilter.gain.value = 0;
+    }
   }
 
   // Apply a preset — sets speed + pitch + reverb
@@ -2995,14 +3068,26 @@ function initMusicViz(content) {
 
   function setReverbWet(wet) {
     // wet 0‥1: dryGain = 1-wet, reverbGain = wet
-    if (dryGainNode) dryGainNode.gain.setTargetAtTime(1 - wet, audioCtx?.currentTime ?? 0, 0.05);
-    if (reverbGainNode) reverbGainNode.gain.setTargetAtTime(wet, audioCtx?.currentTime ?? 0, 0.05);
+    // Only wire the convolver into the graph when reverb is actually in use,
+    // so that default (clean) playback is unaffected by the convolver.
+    if (!audioCtx) return;
+    if (wet > 0) {
+      ensureReverbConnected();
+      dryGainNode.gain.setTargetAtTime(1 - wet, audioCtx.currentTime, 0.05);
+      reverbGainNode.gain.setTargetAtTime(wet, audioCtx.currentTime, 0.05);
+    } else {
+      dryGainNode.gain.setTargetAtTime(1, audioCtx.currentTime, 0.05);
+      reverbGainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+      // Delay disconnecting until the tail has faded (1 s)
+      setTimeout(ensureReverbDisconnected, 1000);
+    }
   }
 
   if (volSlider) {
     volSlider.addEventListener('input', () => {
       if (gainNode) gainNode.gain.value = volSlider.value / 100;
-      audioEl.volume = volSlider.value / 100;
+      // Do NOT touch audioEl.volume – keep it at 1.0 so all attenuation goes
+      // through gainNode and stays clean inside the Web Audio graph.
     });
   }
 
@@ -3048,6 +3133,14 @@ function initMusicViz(content) {
       const v = parseInt(reverbSlider.value);
       if (reverbVal) reverbVal.textContent = v + '%';
       if (audioCtx) setReverbWet(v / 100);
+    });
+  }
+
+  if (bassSlider) {
+    bassSlider.addEventListener('input', () => {
+      const v = parseFloat(bassSlider.value);
+      if (bassVal) bassVal.textContent = v.toFixed(1) + ' dB';
+      if (audioCtx) updateBassRouting(v);
     });
   }
 
@@ -3989,3 +4082,5 @@ window.ieHome     = ieHome;
 window.initCkProjects  = initCkProjects;
 // Conway's Game of Life
 window.initConwayLife  = initConwayLife;
+// Games folder
+window.initGames       = initGames;
