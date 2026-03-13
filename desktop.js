@@ -3453,6 +3453,7 @@ function initMusicViz(content) {
   const fileInput = content.querySelector('#musicviz-file-input');
   const playBtn = content.querySelector('#musicviz-play');
   const stopBtn = content.querySelector('#musicviz-stop');
+  const nextBtn = content.querySelector('#musicviz-next');
   const modeSelect = content.querySelector('#musicviz-mode');
   const nowPlaying = content.querySelector('#musicviz-now-playing');
   const volSlider = content.querySelector('#musicviz-vol');
@@ -3465,6 +3466,49 @@ function initMusicViz(content) {
   const reverbVal = content.querySelector('#musicviz-reverb-val');
   const bassSlider = content.querySelector('#musicviz-bass');
   const bassVal = content.querySelector('#musicviz-bass-val');
+  const queueList = content.querySelector('#musicviz-queue');
+
+  let activeQueue = [];
+  let queueIndex = -1;
+
+  function loadQueueIndex(index) {
+    if (index >= 0 && index < activeQueue.length) {
+      queueIndex = index;
+      const file = activeQueue[index];
+      audioEl.src = URL.createObjectURL(file);
+      nowPlaying.textContent = file.name;
+      ensureAudio();
+      audioEl.play();
+      highlightQueueItem();
+    }
+  }
+
+  function playNextInQueue() {
+    if (activeQueue.length > 0 && queueIndex < activeQueue.length - 1) {
+      loadQueueIndex(queueIndex + 1);
+    }
+  }
+
+  function renderQueue() {
+    if (!queueList) return;
+    queueList.innerHTML = '';
+    activeQueue.forEach((file, idx) => {
+      const li = document.createElement('li');
+      li.textContent = file.name;
+      li.addEventListener('click', () => loadQueueIndex(idx));
+      if (idx === queueIndex) li.style.fontWeight = 'bold';
+      queueList.appendChild(li);
+    });
+  }
+
+  function highlightQueueItem() {
+    if (!queueList) return;
+    const items = queueList.querySelectorAll('li');
+    items.forEach((item, idx) => {
+      item.style.fontWeight = idx === queueIndex ? 'bold' : 'normal';
+      item.style.color = idx === queueIndex ? '#00e5ff' : '#ccc';
+    });
+  }
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
@@ -3693,17 +3737,22 @@ function initMusicViz(content) {
 
   if (fileInput) {
     fileInput.addEventListener('change', () => {
-      const file = fileInput.files[0];
-      if (!file) return;
-      audioEl.src = URL.createObjectURL(file);
-      nowPlaying.textContent = file.name;
-      ensureAudio();
-      audioEl.play();
+      const files = Array.from(fileInput.files);
+      if (files.length === 0) return;
+      activeQueue = activeQueue.concat(files);
+      renderQueue();
+      if (queueIndex === -1) {
+        loadQueueIndex(activeQueue.length - files.length); // Play the first newly added file
+      }
       fileInput.value = '';
     });
   }
+  
+  audioEl.addEventListener('ended', playNextInQueue);
+
   if (playBtn) playBtn.addEventListener('click', () => { if (audioEl.src) { ensureAudio(); audioEl.play(); } else fileInput?.click(); });
   if (stopBtn) stopBtn.addEventListener('click', () => { audioEl.pause(); audioEl.currentTime = 0; });
+  if (nextBtn) nextBtn.addEventListener('click', playNextInQueue);
   if (modeSelect) modeSelect.addEventListener('change', () => { vizMode = modeSelect.value; });
 
   function getFreq() { const b = new Uint8Array(analyser.frequencyBinCount); analyser.getByteFrequencyData(b); return b; }

@@ -1387,12 +1387,14 @@
 
   <!-- ===== MUSIC VISUALISER ===== -->
   <template id="tpl-musicviz">
-    <div class="musicviz-wrap">
+    <div class="musicviz-wrap" style="display:flex; flex-direction:row;">
+      <div style="flex:1; display:flex; flex-direction:column; min-width:0;">
       <div class="musicviz-toolbar">
         <button class="vc-btn" id="musicviz-play" title="Play">▶ Play</button>
         <button class="vc-btn" id="musicviz-stop" title="Stop">⏹ Stop</button>
+        <button class="vc-btn" id="musicviz-next" title="Next">⏭ Next</button>
         <label class="vc-btn" style="cursor:pointer;">📁 Load
-          <input type="file" id="musicviz-file-input" accept="audio/*,.mp3,.wav,.ogg,.flac,.m4a" style="display:none"/>
+          <input type="file" id="musicviz-file-input" accept="audio/*,.mp3,.wav,.ogg,.flac,.m4a" multiple style="display:none"/>
         </label>
         <select id="musicviz-mode" class="musicviz-mode-select">
           <option value="bars">Bars</option>
@@ -1426,6 +1428,15 @@
         <span id="musicviz-bass-val" class="musicviz-bass-val">0 dB</span>
       </div>
       <canvas id="musicviz-canvas" class="musicviz-canvas"></canvas>
+      </div> <!-- end flex:1 wrap -->
+      
+      <!-- Queue Sidebar -->
+      <div class="musicviz-queue-container" style="width: 200px; background: #1a1a2e; border-left: 1px solid #333; display: flex; flex-direction: column;">
+        <div style="padding: 4px 8px; background: #222244; color: #00e5ff; font-size: 11px; font-weight: bold; border-bottom: 1px solid #444488;">QUEUE</div>
+        <ul id="musicviz-queue" style="margin: 0; padding: 0; list-style: none; overflow-y: auto; flex: 1; font-size: 11px; color: #ccc;">
+          <li style="padding: 8px; text-align: center; font-style: italic; color: #666;">Load files to play</li>
+        </ul>
+      </div>
     </div>
   </template>
 

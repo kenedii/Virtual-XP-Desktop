@@ -19,7 +19,7 @@ RUN find /app/dist -name "*.js" ! -name "*.min.js" | while read f; do \
     done
 
 RUN find /app/dist -name "*.css" | while read f; do \
-      cleancss --level 2 -o "$f" "$f"; \
+      cleancss --inline none -O2 -o "$f" "$f"; \
     done
 
 RUN find /app/dist -name "*.html" | while read f; do \
