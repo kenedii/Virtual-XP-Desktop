@@ -3451,6 +3451,7 @@ function initViewCity(content) {
 function initMusicViz(content) {
   const canvas = content.querySelector('#musicviz-canvas');
   const fileInput = content.querySelector('#musicviz-file-input');
+  const prevBtn = content.querySelector('#musicviz-prev');
   const playBtn = content.querySelector('#musicviz-play');
   const stopBtn = content.querySelector('#musicviz-stop');
   const nextBtn = content.querySelector('#musicviz-next');
@@ -3478,6 +3479,18 @@ function initMusicViz(content) {
       audioEl.src = URL.createObjectURL(file);
       nowPlaying.textContent = file.name;
       ensureAudio();
+      
+      // Re-apply current preset settings manually to the new audio element
+      const speed = parseFloat(speedSlider?.value ?? 1);
+      const semitones = parseFloat(pitchSlider?.value ?? 0);
+      const rev = parseInt(reverbSlider?.value ?? 0);
+      
+      audioEl.playbackRate = computeRate(speed, semitones);
+      if ('preservesPitch' in audioEl) audioEl.preservesPitch = false;
+      
+      setReverbWet(rev / 100);
+      if (bassSlider) updateBassRouting(parseFloat(bassSlider.value));
+
       audioEl.play();
       highlightQueueItem();
     }
@@ -3486,6 +3499,12 @@ function initMusicViz(content) {
   function playNextInQueue() {
     if (activeQueue.length > 0 && queueIndex < activeQueue.length - 1) {
       loadQueueIndex(queueIndex + 1);
+    }
+  }
+
+  function playPrevInQueue() {
+    if (activeQueue.length > 0 && queueIndex > 0) {
+      loadQueueIndex(queueIndex - 1);
     }
   }
 
@@ -3749,10 +3768,24 @@ function initMusicViz(content) {
   }
   
   audioEl.addEventListener('ended', playNextInQueue);
+  audioEl.addEventListener('play', () => { if (playBtn) playBtn.textContent = '⏸ Pause'; });
+  audioEl.addEventListener('pause', () => { if (playBtn) playBtn.textContent = '▶ Play'; });
 
-  if (playBtn) playBtn.addEventListener('click', () => { if (audioEl.src) { ensureAudio(); audioEl.play(); } else fileInput?.click(); });
+  if (playBtn) playBtn.addEventListener('click', () => { 
+    if (!audioEl.src) {
+      fileInput?.click();
+    } else {
+      if (audioEl.paused) {
+        ensureAudio();
+        audioEl.play();
+      } else {
+        audioEl.pause();
+      }
+    }
+  });
   if (stopBtn) stopBtn.addEventListener('click', () => { audioEl.pause(); audioEl.currentTime = 0; });
   if (nextBtn) nextBtn.addEventListener('click', playNextInQueue);
+  if (prevBtn) prevBtn.addEventListener('click', playPrevInQueue);
   if (modeSelect) modeSelect.addEventListener('change', () => { vizMode = modeSelect.value; });
 
   function getFreq() { const b = new Uint8Array(analyser.frequencyBinCount); analyser.getByteFrequencyData(b); return b; }
