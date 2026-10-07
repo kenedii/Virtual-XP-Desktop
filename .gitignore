@@ -3,3 +3,6 @@ dist/
 dev.log
 *.log
 _remote_index.html
+
+# Local-only deployment config (not published)
+cloudbuild.yml
